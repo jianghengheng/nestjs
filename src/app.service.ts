@@ -9,7 +9,13 @@ export class AppService {
     @InjectRepository(Nav)
     private readonly nav: Repository<Nav>,
   ) {}
-  async getNav() {
-    return await this.nav.find();
+  async getNav(id: number) {
+    // this.nav.findBy({id:})
+    return await this.nav.findBy({ id });
+  }
+  addNav() {
+    let nav = new Nav();
+    nav.title = '你爸爸';
+    return this.nav.insert(nav);
   }
 }
