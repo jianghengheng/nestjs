@@ -7,9 +7,10 @@ import { CategoryController } from './category/category.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Nav } from './entity/nav.entity';
 import { Category } from './entity/category.entity';
-import { User } from './entity/user.entity';
+import { User } from './users/entity/user.entity';
 import { UserController } from './users/use.controller';
 import { UserService } from './users/user.service';
+import {ENTITY} from './entityIndex'
 
 @Module({
   imports: [
@@ -20,10 +21,11 @@ import { UserService } from './users/user.service';
       username: 'root',
       password: 'JHeng1997',
       database: 'blog',
+      entities:ENTITY,
       autoLoadEntities: true, // autoLoadEntities: true, // 使用这个配置自动导入entities
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Nav, Category, User]),
+    TypeOrmModule.forFeature(ENTITY),
 
   ],
   controllers: [AppController, CategoryController, UserController],
