@@ -1,14 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { HttpExceptionFilter } from './utils/error';
+import { TransformInterceptor } from './utils/success';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalInterceptors(new TransformInterceptor());
   const config = new DocumentBuilder()
-    .setTitle('this is a title')
-    .setDescription('this is a description')
+    .setTitle('蒋衡的博客')
+    .setDescription('博客的接口')
     .setVersion('1.0')
-    .addTag('cat')
-    .addTag('dog')
+
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
