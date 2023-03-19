@@ -13,8 +13,7 @@ import { ApiOperation, ApiTags, ApiQuery } from '@nestjs/swagger';
 
 import { UserService } from './user.service'
 @Controller('/User')
-@ApiTags('用户模块')
-
+@ApiTags('用户模块1')
 export class UserController {
     constructor(
         private readonly UserService: UserService
@@ -25,6 +24,7 @@ export class UserController {
         description: '这是需要传递的参数',
     })
     @Get('/getUser')
+    
     async getUser(  @Query() query: { id: number }) {
         console.log(query);
         let { id }: { id: number } = query
